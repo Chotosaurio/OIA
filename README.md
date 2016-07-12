@@ -1,1 +1,1 @@
-# Mi carpeta con todos los ejercicios resolvidos y por resolver que son relevantes
+# Mi carpeta con todos los ejercicios resueltos y por resolver que son relevantes
