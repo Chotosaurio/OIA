@@ -1,0 +1,38 @@
+#include<iostream>
+#include<fstream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+ifstream entra;
+
+int main(){
+    entra.open("paises.in");
+    int n,k=0;
+    entra>>n;
+    string a,b,c;
+    vector<string>pais[n],paises;
+    vector<string>::iterator it;
+    for(int i=1;i<=n;i++){
+            entra>>a>>b;
+            it=find(paises.begin(),paises.end(),a);
+            if(it==paises.end()){
+                        paises.push_back(a);}//////////////////////Tratar de cargar en el vector con arreglos///////////////
+            it=find(paises.begin(),paises.end(),b);
+            if(it==paises.end()){
+                        paises.push_back(b);}/////////////////////Tratar de cargar en el vector con arreglos////////////////
+            it=paises.begin();/////////////////////////////si logro hacer lo de arriba que apunte al end del tal vez/////////
+            for (int j=0;j<paises.size();j++){
+             if(*it==b){
+                       pais[j].push_back(a);}
+             if(*it==a){
+                       pais[j].push_back(b);}
+                       it++;}
+            }
+    it=paises.begin();///////////////q apunte al end si logro cambiar
+    for(int i=0;i<paises.size();i++){
+            cout<<*it<<pais[i].size()<<"\n";
+            it++;
+            }///////////////////////programar para los translimitrofes
+    system("pause");
+    return 0;
+}
