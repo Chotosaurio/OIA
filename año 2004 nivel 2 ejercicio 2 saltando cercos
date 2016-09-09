@@ -1,0 +1,60 @@
+//TERMINAR
+#include<iostream>
+#include<fstream>
+using namespace std;
+
+ifstream entra;
+
+int main(){
+    entra.open("cercos.in");
+    int n,m,px,py,r;
+    entra>>n>>m;
+    int tabl[n+1][m+1];
+    for(int i=0;i<n+1;i++){
+            for(int j=0;j<m+1;j++){
+                    tabl[i][j]=0;}}
+    entra>>px>>py;
+    tabl[py][px]=9;
+    entra>>r;
+    //cargando tabla
+    for (int i=2;i<r+2;i++){
+        int x1,y1,x2,y2,puntero1,puntero2;
+        entra>>x1>>y1>>x2>>y2;
+        tabl[x1][y1]=i;
+        tabl[x2][y2]=i;
+        tabl[x1][y2]=i;
+        tabl[x2][y1]=i;
+        puntero1=x1;
+        puntero2=y1;
+        while(puntero1!=x2){
+                tabl[puntero1][y1]=1;
+                tabl[puntero1][y2]=1;
+                if(puntero1<x2){
+                puntero1++;}
+                else{
+                puntero1--;}
+        }while(puntero2!=y2){                     
+                tabl[x1][puntero2]=1;
+                tabl[x2][puntero2]=1;
+                if(puntero2<y2){
+                puntero2++;}
+                else{
+                puntero2--;}
+        }
+        
+//////////////////
+     for(int k=n;k>=0;k--){
+            for(int l=0;l<=m;l++){
+                    cout<<tabl[k][l];}
+                    cout<<endl;}
+                   cout<<"................."<<endl;
+////////////////////////////                   
+        tabl[x1][y1]=i;
+        tabl[x2][y2]=i;
+        tabl[x1][y2]=i;
+        tabl[x2][y1]=i;
+                   }//tabla cargada
+    
+    system("pause");
+    return 0;
+    }
