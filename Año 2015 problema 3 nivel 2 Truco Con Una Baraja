@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+ifstream entra;
+
+int main(){
+	entra.open("cartas.in");
+	int n,m,ord,k;
+	entra>>n;
+	list<int>orden;
+	for(int i=0;i<n;i++){
+		entra>>ord;
+		orden.push_back(ord);
+	}entra>>m;
+	int elige[m],ubica[m];
+	for (int i=0;i<m;i++){
+		entra>>elige[i];
+		ubica[i]=0;
+	}
+	entra>>k;
+	for (int i=0;i<m;i++){
+		ubica[i]=elige[i]+k+1;
+		while(ubica[i]>n){
+			ubica[i]=ubica[i]-n;
+		}
+	}
+	cout<<"elige	ubica"<<endl;
+	for(int i=0;i<m;i++){
+		cout<<elige[i]<<"	 "<<ubica[i]<<endl;
+	}
+	return 0;
+}
