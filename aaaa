@@ -1,0 +1,61 @@
+#include<bits/stdc++.h>
+using namespace std;
+void makeconections(int N , int neuron1 , int neuron2 , vector < vector < bool > > &conec , vector < vector < bool > > &info ){
+    neuron1--;
+    neuron2--;
+    vector < int > conecs;//check if they aren't more neurons connected to any of those'
+    conecs.push_back(neuron2);
+//like in here it is the problem i got
+    for(int i = 0;i < N;i++){
+        if(conec[neuron1][i] == true ){
+            conecs.push_back(i);
+        }
+    }
+    for(int i = 0;i <conecs.size();i++){
+        for(int j=0;j<N;j++){
+            info[neuron1][j]=info[conecs[i]][j] or info[neuron1][j];
+        }
+    }
+    for(int i = 0;i < conecs.size();i++){
+        for(int j=0;j<N;j++){
+            info[conecs[i]][j]=info[conecs[i]][j] or info[neuron1][j];
+
+        }
+    }
+    //until here
+}
+
+
+int main(){
+    int N, P;
+    cin>>N>>P;
+    int conex[P+1][2];
+    //start zeroing
+    vector<vector<bool>>conec(N+1,(vector<bool>(N+1)));//this is for neuronal conecctions
+    vector<vector<bool>>info(N+1,(vector<bool>(N+1)));//this is for information
+    for(int i = 0; i < N;i++){
+        for(int j = 0;j < N;j++){
+        conec[i][j]=false;
+        if(i==j){
+        info[i][j]=true;}
+        else
+        info[i][j]=false;//every element has at least 1 element and that will be the same he is
+        }
+    }
+    for(int i=0;i<P;i++){
+        cin>>conex[i][0]>>conex[i][1];
+        conec[conex[i][0]][conex[i][1]]=!conec[conex[i][0]][conex[i][1]];
+        if(conec[conex[i][0]][conex[i][1]]==1)
+        makeconections(N,conex[i][0],conex[i][1],conec,info);
+    }
+    for(int i =0;i<N;i++){
+        unsigned int contador=0;
+        for(int j=0;j<N;j++){
+            if(info[i][j]==1)
+                contador++;
+        }
+        cout<<contador<<endl;
+    }
+
+    return 0;
+}
